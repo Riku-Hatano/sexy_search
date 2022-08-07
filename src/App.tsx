@@ -2,6 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import { Counter } from './features/counter/Counter';
 import './App.css';
+import Exchange from './JSON'
 
 function App() {
   return (
@@ -51,6 +52,9 @@ function App() {
           </a>
         </span>
       </header>
+      <div>
+        <Exchange />
+      </div>
     </div>
   );
 }
