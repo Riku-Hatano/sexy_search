@@ -5,15 +5,16 @@ class App extends Component {
         super()
         this.state = {
             loading:false,
-            character: {},
+            character:{},
         }
     }
     
-    componentDidMount(){
+        componentDidMount(){
         this.setState({
             loading: true
         })
-        fetch("https://pokeapi.co/api/v2/ability")
+        fetch("https://pokeapi.co/api/v2/ability/")
+
             .then(response => response.json())
             .then(data => {
                 this.setState({
@@ -21,24 +22,21 @@ class App extends Component {
                     loading: false
                 })
             })
+            console.log("fetch")
         }
-
-    render() {
+        render() {
+        const displayText = this.state.loading ? "now loading...." : this.state.character.count
         console.log(this.state.character.results)
-        console.log(this.state.character)
-
-        const displayText = this.state.loading ? "now loading...." : this.state.character.results[0].name
-        const displayText2 = this.state.loading ? "now loading...." : this.state.character.count
         return (
             <div>
-                <div>
-                    {displayText}
-                </div>
-                <div>
-                    {displayText2}
-                </div>
+                done
+                {displayText}
+
             </div>
         )
     }
 }
+
+
+
 export default App
