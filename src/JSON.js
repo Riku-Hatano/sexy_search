@@ -13,7 +13,7 @@ class App extends Component {
         this.setState({
             loading: true
         })
-        fetch("https://swapi.dev/api/people/1")
+        fetch("https://pokeapi.co/api/v2/ability")
             .then(response => response.json())
             .then(data => {
                 this.setState({
@@ -24,10 +24,19 @@ class App extends Component {
         }
 
     render() {
-        const displayText = this.state.loading ? "now loading...." : this.state.character.name
+        console.log(this.state.character.results)
+        console.log(this.state.character)
+
+        const displayText = this.state.loading ? "now loading...." : this.state.character.results[0].name
+        const displayText2 = this.state.loading ? "now loading...." : this.state.character.count
         return (
             <div>
-                {displayText}
+                <div>
+                    {displayText}
+                </div>
+                <div>
+                    {displayText2}
+                </div>
             </div>
         )
     }
