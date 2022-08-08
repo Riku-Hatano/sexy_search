@@ -14,6 +14,7 @@ class App extends Component {
             loading: true
         })
         fetch("https://pokeapi.co/api/v2/ability/")
+
             .then(response => response.json())
             .then(data => {
                 this.setState({
@@ -23,7 +24,6 @@ class App extends Component {
             })
             console.log("fetch")
         }
-
         render() {
         const displayText = this.state.loading ? "now loading...." : this.state.character.count
         console.log(this.state.character.results)
@@ -31,6 +31,7 @@ class App extends Component {
             <div>
                 done
                 {displayText}
+
             </div>
         )
     }
