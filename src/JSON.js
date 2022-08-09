@@ -37,11 +37,15 @@ class App extends Component {
         const div = document.getElementById("div")
         const num = this.state.loading ? "loading" : this.state.character.data.length
         for (let i = 0 ; i < num ; i ++) {
-            const flavor = this.state.character.data[i].name
-            const item = document.createElement("div")
-            item.textContent = flavor
-            div.appendChild(item)
-            console.log(flavor)
+            const monster = this.state.character.data[i].name
+            const flavor = this.state.character.data[i].desc
+            const monsterItem = document.createElement("div")
+            const flavorItem = document.createElement("div")
+            monsterItem.textContent = monster
+            flavorItem.textContent = flavor
+            div.appendChild(monsterItem)
+            div.appendChild(flavorItem)
+            console.log(this.state.character.data[i].desc)
         }
         return (
             <div id="div">
