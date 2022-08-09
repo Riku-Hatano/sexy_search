@@ -42,6 +42,7 @@ class App extends Component {
         return (
             <div>
                 {flavor}
+
             </div>
         )
         // const displayText = this.state.loading ? "now loading...." : this.state.character.data.length
