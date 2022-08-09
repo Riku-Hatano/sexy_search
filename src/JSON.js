@@ -34,14 +34,18 @@ class App extends Component {
 
 
     render() {
+        const div = document.getElementById("div")
         const num = this.state.loading ? "loading" : this.state.character.data.length
         for (let i = 0 ; i < num ; i ++) {
             const flavor = this.state.character.data[i].name
+            const item = document.createElement("div")
+            item.textContent = flavor
+            div.appendChild(item)
             console.log(flavor)
         }
         return (
-            <div>
-                {flavor}
+            <div id="div">
+                {/* {flavor} */}
             </div>
         )
         // const displayText = this.state.loading ? "now loading...." : this.state.character.data.length
