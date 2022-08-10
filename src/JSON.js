@@ -13,7 +13,7 @@ class App extends Component {
     this.setState({
         loading: true
     })
-    fetch("https://db.ygoprodeck.com/api/v7/cardinfo.php?type=Normal%20Monster")
+    fetch("https://db.ygoprodeck.com/api/v7/cardinfo.php?type=Pendulum%20Normal%20Monster")
     // fetch("https://pokeapi.co/api/v2/ability/")
         .then(response => response.json())
         .then(data => {
@@ -23,6 +23,26 @@ class App extends Component {
             })
         })
         console.log("fetch")
+        fetch("https://db.ygoprodeck.com/api/v7/cardinfo.php?type=Normal%20Monster")
+        // fetch("https://pokeapi.co/api/v2/ability/")
+            .then(response => response.json())
+            .then(data => {
+                this.setState({
+                    character: data,
+                    loading: false
+                })
+            })
+            console.log("fetch")
+        fetch("https://db.ygoprodeck.com/api/v7/cardinfo.php?type=Normal%20Tuner%20Monster")
+        // fetch("https://pokeapi.co/api/v2/ability/")
+            .then(response => response.json())
+            .then(data => {
+                this.setState({
+                    character: data,
+                    loading: false
+                })
+            })
+            console.log("done tuner normal monster")
     }
 
     // makeDiscriptions() {
@@ -49,7 +69,6 @@ class App extends Component {
         }
         return (
             <div id="div">
-                {/* {flavor} */}
             </div>
         )
         // const displayText = this.state.loading ? "now loading...." : this.state.character.data.length
