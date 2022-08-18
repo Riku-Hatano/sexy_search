@@ -30,7 +30,7 @@ class App extends Component {
         .then(data => {
             this.setState({
                 character2: data,
-                loading: false
+                loading: true
             })
             console.log(this.state.character2.data)
         })
