@@ -11,7 +11,7 @@ class App extends Component {
         }
     }
     
-    componentDidMount(){
+    async componentDidMount(){
     this.setState({
         loading: true
     })
@@ -24,32 +24,34 @@ class App extends Component {
             })
             console.log(this.state.character1.data)
         })
-        console.log("fetch")
+        console.log("pendulum normal")
     fetch("https://db.ygoprodeck.com/api/v7/cardinfo.php?type=Normal%20Monster")
         .then(response => response.json())
         .then(data => {
             this.setState({
                 character2: data,
-                loading: true
+                loading: false
             })
             console.log(this.state.character2.data)
         })
-        console.log("done normal")
+        console.log("normal")
     fetch("https://db.ygoprodeck.com/api/v7/cardinfo.php?type=Normal%20Tuner%20Monster")
         .then(response => response.json())
         .then(data => {
             this.setState({
                 character3: data,
-                loading: false
+                loading: true
             })
+            console.log(this.state.character3.data)
         })
-        console.log("done tuner normal monster")
+        console.log("tuner normal")
     }
 
 
     render() {
         let div = document.getElementById("div")
         let num = this.state.loading ? "loading" : this.state.character1.data.length
+        // let num = this.state.character1.data.length
         console.log(num)
         for (let i = 0 ; i < num ; i ++) {
             const monster = this.state.character1.data[i].name
@@ -62,9 +64,9 @@ class App extends Component {
             div.appendChild(flavorItem)
             console.log(this.state.character1.data[i].desc)
         }
-        console.log(num)
         div = document.getElementById("div")
         num = this.state.loading ? "loading" : this.state.character2.data.length
+        // num = this.state.character2.data.length
         for (let i = 0 ; i < num ; i ++) {
             const monster = this.state.character2.data[i].name
             const flavor = this.state.character2.data[i].desc
@@ -78,6 +80,7 @@ class App extends Component {
         }
         div = document.getElementById("div")
         num = this.state.loading ? "loading" : this.state.character3.data.length
+        // num = this.state.character3.data.length
         for (let i = 0 ; i < num ; i ++) {
             const monster = this.state.character3.data[i].name
             const flavor = this.state.character3.data[i].desc
@@ -89,6 +92,7 @@ class App extends Component {
             div.appendChild(flavorItem)
             console.log(this.state.character3.data[i].desc)
         }
+
         return (
             <div>
                 <meta name="viewport" content="width=divice-width, initial-scale=1.0"></meta>
