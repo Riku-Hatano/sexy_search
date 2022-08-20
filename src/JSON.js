@@ -90,7 +90,10 @@ class App extends Component {
             console.log(this.state.character3.data[i].desc)
         }
         return (
-            <div id="div">
+            <div>
+                <meta name="viewport" content="width=divice-width, initial-scale=1.0"></meta>
+                <div id="div">
+                </div>
             </div>
         )
         // const displayText = this.state.loading ? "now loading...." : this.state.character.data.length
