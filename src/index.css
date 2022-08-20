@@ -5,13 +5,13 @@ body {
 
 @media screen and (min-width: 480px) {
   #div {
-    background-color: gray;
+    color: gray;
   }
 }
 
 @media screen and (max-width: 479px) {
   #div {
-    background-color: red;
+    color: black;
   }
 }
 
