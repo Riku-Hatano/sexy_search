@@ -46,12 +46,6 @@ class App extends Component {
         console.log("done tuner normal monster")
     }
 
-    // makeDiscriptions() {
-    //     for (let i = 0 ; i < this.state.character.data.length ; i++) {
-    //         let monster = this.state.character.data[i].name
-    //         console.log(monster)
-    //     }
-    // }
 
     render() {
         let div = document.getElementById("div")
