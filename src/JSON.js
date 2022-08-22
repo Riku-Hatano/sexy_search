@@ -1,4 +1,5 @@
 import React, {Component} from "react"
+import Card from "./card"
 
 class App extends Component {
     constructor(){
@@ -51,7 +52,7 @@ class App extends Component {
 
 
     render() {
-        let div = document.getElementById("div")
+        let card = document.getElementById("card")
         for (let i = 0 ; i < this.state.characters.length ; i++) {
             let num = this.state.loading ? "loading" : this.state.characters[i].data.length
             for (let j = 0 ; j < num ; j ++) {
@@ -59,59 +60,26 @@ class App extends Component {
                 const flavor = this.state.characters[i].data[j].desc
                 const monsterItem = document.createElement("div")
                 const flavorItem = document.createElement("div")
+                monsterItem.className = "monsterItem parentItem"
+                flavorItem.className = "flavorItem parentItem"
                 monsterItem.textContent = monster
                 flavorItem.textContent = flavor
-                div.appendChild(monsterItem)
-                div.appendChild(flavorItem)
-                console.log(this.state.characters[i].data[j].desc)
+                card.appendChild(monsterItem)
+                card.appendChild(flavorItem)
+                // console.log(this.state.characters[i].data[j].desc)
             }
         }
         
-        // let num = this.state.loading ? "loading" : this.state.character1.data.length
-        // for (let i = 0 ; i < num ; i ++) {
-        //     const monster = this.state.character1.data[i].name
-        //     const flavor = this.state.character1.data[i].desc
-        //     const monsterItem = document.createElement("div")
-        //     const flavorItem = document.createElement("div")
-        //     monsterItem.textContent = monster
-        //     flavorItem.textContent = flavor
-        //     div.appendChild(monsterItem)
-        //     div.appendChild(flavorItem)
-        //     console.log(this.state.character1.data[i].desc)
-        // }
-        // num = this.state.loading ? "loading" : this.state.character2.data.length
-        // for (let i = 0 ; i < num ; i ++) {
-        //     const monster = this.state.character2.data[i].name
-        //     const flavor = this.state.character2.data[i].desc
-        //     const monsterItem = document.createElement("div")
-        //     const flavorItem = document.createElement("div")
-        //     monsterItem.textContent = monster
-        //     flavorItem.textContent = flavor
-        //     div.appendChild(monsterItem)
-        //     div.appendChild(flavorItem)
-        //     console.log(this.state.character2.data[i].desc)
-        // }
-        // num = this.state.loading ? "loading" : this.state.character3.data.length
-        // for (let i = 0 ; i < num ; i ++) {
-        //     const monster = this.state.character3.data[i].name
-        //     const flavor = this.state.character3.data[i].desc
-        //     const monsterItem = document.createElement("div")
-        //     const flavorItem = document.createElement("div")
-        //     monsterItem.textContent = monster
-        //     flavorItem.textContent = flavor
-        //     div.appendChild(monsterItem)
-        //     div.appendChild(flavorItem)
-        //     console.log(this.state.character3.data[i].desc)
-        // }
-
+        
         return (
             <div>
-                <meta name="viewport" content="width=divice-width, initial-scale=1.0"></meta>
-                <div id="div">
+                <meta name="viewport" content="width=divice-width, initial-scale=1.0"></meta>    
+                <div id="cardList">
+                    <div id="card">
+                    </div>     
                 </div>
             </div>
         )
-        // const displayText = this.state.loading ? "now loading...." : this.state.character.data.length
     }
 }
 

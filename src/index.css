@@ -4,14 +4,36 @@ body {
 }
 
 @media screen and (min-width: 480px) {
-  #div {
-    color: gray;
+  #cardContent {
+    color: white;
   }
 }
 
 @media screen and (max-width: 479px) {
-  #div {
+  #cardContent {
     color: black;
   }
+}
+
+#cardList {
+  width: 1000px;
+  background-color: gray;
+}
+#card {
+  display: flex;
+  flex-wrap: wrap;
+}
+.parentItem {
+  background-color: green;
+  border: solid;
+}
+.flavorItem {
+  width: 200px;
+  height: 200px;
+  background-color: khaki;
+}
+.monsterItem {
+  width: 200px;
+  height: 40px;
 }
 
