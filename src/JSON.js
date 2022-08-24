@@ -52,10 +52,17 @@ class App extends Component {
 
 
     render() {
+        let counter = 0
+        let individualCard
+        const parent = document.getElementById("cardList")
         let card = document.getElementById("card")
         for (let i = 0 ; i < this.state.characters.length ; i++) {
             let num = this.state.loading ? "loading" : this.state.characters[i].data.length
             for (let j = 0 ; j < num ; j ++) {
+                individualCard = document.createElement("div")
+                individualCard.id = counter
+                parent.appendChild(individualCard)
+
                 const monster = this.state.characters[i].data[j].name
                 const flavor = this.state.characters[i].data[j].desc
                 const monsterItem = document.createElement("div")
@@ -64,8 +71,8 @@ class App extends Component {
                 flavorItem.className = "flavorItem parentItem"
                 monsterItem.textContent = monster
                 flavorItem.textContent = flavor
-                card.appendChild(monsterItem)
-                card.appendChild(flavorItem)
+                individualCard.appendChild(monsterItem)
+                individualCard.appendChild(flavorItem)
                 // console.log(this.state.characters[i].data[j].desc)
             }
         }
@@ -75,8 +82,7 @@ class App extends Component {
             <div>
                 <meta name="viewport" content="width=divice-width, initial-scale=1.0"></meta>    
                 <div id="cardList">
-                    <div id="card">
-                    </div>     
+                        
                 </div>
             </div>
         )
