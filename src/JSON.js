@@ -1,6 +1,11 @@
 import React, {Component} from "react"
 import Card from "./card"
 
+
+// function clicked(props) {
+//     console.log(props)
+// }
+
 class App extends Component {
     constructor(){
         super()
@@ -8,9 +13,13 @@ class App extends Component {
             loading:true,
             characters: {}
         }
+        this.clicked = this.clicked.bind(this)
     }
-    
-    async componentDidMount(){
+    clicked = (props) => {
+        console.log("id: " + props)
+    }
+
+    componentDidMount(){
     this.setState({
         loading: true
     })
@@ -22,7 +31,6 @@ class App extends Component {
             this.setState({
                 loading: true
             })
-            console.log(this.state.characters.data)
         })
         console.log("pendulum normal")
     fetch("https://db.ygoprodeck.com/api/v7/cardinfo.php?type=Normal%20Monster")
@@ -32,7 +40,6 @@ class App extends Component {
             this.setState({
                 loading: false
             })
-            console.log(this.state.characters.data)
         })
         console.log("normal")
     fetch("https://db.ygoprodeck.com/api/v7/cardinfo.php?type=Normal%20Tuner%20Monster")
@@ -42,7 +49,6 @@ class App extends Component {
             this.setState({
                 loading: true
             })
-            console.log(this.state.characters.data)
         })
         console.log("tuner normal")
     this.setState({
@@ -50,10 +56,8 @@ class App extends Component {
     })
     }
 
-
     render() {
         let counter = 0
-        let individualCard 
         let monster
         let flavor
         let atk
@@ -62,13 +66,13 @@ class App extends Component {
         let flavorItem
         let atkItem
         let defItem
-        let descriptions = ["name", "desc", "atk", "def"]
         const parent = document.getElementById("cardList")
         for (let i = 0 ; i < this.state.characters.length ; i++) {
             let num = this.state.loading ? "loading" : this.state.characters[i].data.length
             for (let j = 0 ; j < num ; j ++) {
-                individualCard = document.createElement("div")
+                const individualCard = document.createElement("div")
                 individualCard.id = counter
+                individualCard.addEventListener("click", () => this.clicked(individualCard.id))
                 parent.appendChild(individualCard)
 
                 monster = this.state.characters[i].data[j].name
@@ -91,10 +95,10 @@ class App extends Component {
                 individualCard.appendChild(flavorItem)
                 individualCard.appendChild(atkItem)
                 individualCard.appendChild(defItem)
-                // console.log(this.state.characters[i].data[j].desc)
+                counter++
             }
         }
-        
+        counter = 0
         
         return (
             <div>
