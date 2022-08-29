@@ -1,4 +1,5 @@
 import axios from "axios"
+
 import { produceWithPatches } from "immer"
 import React, {Component} from "react"
 import Card from "./card"
@@ -10,6 +11,7 @@ type State = {
     characters: any
 }
 class App extends Component <Props, State> {
+
     constructor(props: any){
         super(props)
         this.state = {
@@ -84,6 +86,52 @@ class App extends Component <Props, State> {
         )
     }
 }
+    // fetch("https://db.ygoprodeck.com/api/v7/cardinfo.php?type=Pendulum%20Normal%20Monster")
+    //     .then(response => response.json())
+    //     .then(data => {
+    //         const d = data["data"] as Array<any>
+    //         characters.concat(d)
+    //         this.setState({
+    //             loading: true
+    //         })
+    //     })
+    //     console.log("pendulum normal")
+    // fetch("https://db.ygoprodeck.com/api/v7/cardinfo.php?type=Normal%20Monster")
+    //     .then(response => response.json())
+    //     .then(data => {
+    //         const d = data["data"] as Array<any>
+    //         characters.concat(d)
+    //         this.setState({
+    //             loading: false
+    //         })
+    //     })
+    //     console.log("normal")
+    
+    // console.log(characters)
+    // console.log(characters[0])
+    // box = characters[0].concat(characters[1], characters[2])
+    // console.log(box)
 
+
+
+
+    // fetch("https://db.ygoprodeck.com/api/v7/cardinfo.php?type=Normal%20Tuner%20Monster")
+
+    //     .then(response => response.json())
+    //     .then(data => {
+    //         console.log(data)
+    //         const d = data["data"] as Array<any>
+    //         console.log(d)
+    //         characters.concat(d)
+    //         console.log(characters)
+    //         this.setState({
+    //             loading: true
+    //         })
+    //     })
+    //     console.log("tuner normal")
+
+       
+        
+        
 
 export default App

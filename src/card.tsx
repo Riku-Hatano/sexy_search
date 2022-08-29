@@ -2,6 +2,7 @@ import { Component } from "react";
 
 
 
+
 const Card = (characters: any, loading: boolean, stateInfo: any) => {
     console.log("done")
     console.log(characters)
@@ -95,6 +96,8 @@ const Card = (characters: any, loading: boolean, stateInfo: any) => {
 
         </div>
     )
+
 }
+
 
 export default Card

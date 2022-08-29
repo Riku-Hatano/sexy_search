@@ -30,6 +30,9 @@ body {
   background-color: green;
   border: solid;
 }
+.parentItem:hover {
+  color: orange;
+}
 .flavorItem {
   height: 200px;
   overflow: hidden;
