@@ -23,13 +23,13 @@ class App extends Component <Props, State> {
     }
 
     
-    componentDidMount(){
+    async componentDidMount(){
+        console.log("done")
         this.setState({
             loading: true
         })
         
         const characters: Array<any> = []
-        let characters2: Array<any> = []
         let box: any = []
         
         axios.get("https://db.ygoprodeck.com/api/v7/cardinfo.php?type=Normal%20Tuner%20Monster")
@@ -46,12 +46,12 @@ class App extends Component <Props, State> {
         axios.get("https://db.ygoprodeck.com/api/v7/cardinfo.php?type=Pendulum%20Normal%20Monster")
         .then((results) => { 
             const d = results.data["data"] as Array<any>
-            characters2.push(d);
+            characters.push(d);
         })
         .catch(err => {
             console.log("err:", err);
         });
-        axios.get("https://db.ygoprodeck.com/api/v7/cardinfo.php?type=Normal%20Monster")
+        await axios.get("https://db.ygoprodeck.com/api/v7/cardinfo.php?type=Normal%20Monster")
         .then((results) => {
             const d = results.data["data"] as Array<any>
             characters.push(d);       
@@ -64,10 +64,10 @@ class App extends Component <Props, State> {
         .catch(err => {
             console.log("err:", err);
         });
-        console.log(box)
         this.setState({
             characters: box
         })
+        console.log(box)
         console.log(this.state.characters)
     }
 
@@ -75,7 +75,11 @@ class App extends Component <Props, State> {
         return (
         <div>
             <meta name="viewport" content="width=divice-width, initial-scale=1.0"></meta>    
-            <Card stateInfo={this.state}/>
+            <Card 
+            characterInfo={this.state.characters}
+            loadingInfo={this.state.loading}
+            stateInfo={this}
+            />
         </div>
         )
     }
