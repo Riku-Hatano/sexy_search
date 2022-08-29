@@ -28,6 +28,8 @@ class App extends Component <Props, State> {
     async componentDidMount(){
         console.log("done")
         console.log("done")
+        console.log("done")
+        console.log("done")
         this.setState({
             loading: true
         })
