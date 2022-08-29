@@ -3,6 +3,7 @@ import { Component } from "react";
 
 
 const Card = (characters: any, loading: boolean, stateInfo: any) => {
+    console.log("done")
     console.log(characters)
     let counter = 0
     let monster
