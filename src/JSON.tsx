@@ -20,16 +20,13 @@ class App extends Component <Props, State> {
         }
         this.clicked = this.clicked.bind(this)
     }
+
     clicked = (props: number) => {
         console.log("id: " + props)
     }
 
     
     async componentDidMount(){
-        console.log("done")
-        console.log("done")
-        console.log("done")
-        console.log("done")
         this.setState({
             loading: true
         })
@@ -78,7 +75,7 @@ class App extends Component <Props, State> {
 
     render() {
         return (
-        <div>
+        <div id="root">
             <meta name="viewport" content="width=divice-width, initial-scale=1.0"></meta>    
             <Card 
             characterInfo={this.state.characters}
