@@ -26,7 +26,7 @@ class App extends Component <Props, State> {
     }
 
     
-    async componentDidMount(){
+    componentDidMount(){
         this.setState({
             loading: true
         })
@@ -40,37 +40,63 @@ class App extends Component <Props, State> {
             // console.log(results.data); // コンソールログにresultsに含まれるdataを表示
             const d = results.data["data"] as Array<any>
             characters.push(d);
+            console.log("1")
         })
-        // catchでエラー時の挙動を定義
-        .catch(err => {
-            console.log("err:", err);
-        });
-        axios.get("https://db.ygoprodeck.com/api/v7/cardinfo.php?type=Pendulum%20Normal%20Monster")
+        .then(() => axios.get("https://db.ygoprodeck.com/api/v7/cardinfo.php?type=Pendulum%20Normal%20Monster"))
         .then((results) => { 
             const d = results.data["data"] as Array<any>
             characters.push(d);
+            console.log("2")
         })
-        .catch(err => {
-            console.log("err:", err);
-        });
-        await axios.get("https://db.ygoprodeck.com/api/v7/cardinfo.php?type=Normal%20Monster")
+        .then(() => axios.get("https://db.ygoprodeck.com/api/v7/cardinfo.php?type=Normal%20Monster"))
         .then((results) => {
             const d = results.data["data"] as Array<any>
             characters.push(d);       
+            console.log("3")
             for (let i = 0 ; i < characters.length ; i++) {
                 for (let j = 0 ; j < characters[i].length ; j++) {
                     box.push(characters[i][j])
                 }
             }        
         })
+        // catchでエラー時の挙動を定義
         .catch(err => {
             console.log("err:", err);
-        });
+        })
+
+
+
+
+
+
+        // axios.get("https://db.ygoprodeck.com/api/v7/cardinfo.php?type=Pendulum%20Normal%20Monster")
+        // .then((results) => { 
+        //     const d = results.data["data"] as Array<any>
+        //     characters.push(d);
+        //     console.log("2")
+        // })
+        // .catch(err => {
+        //     console.log("err:", err);
+        // });
+        // await axios.get("https://db.ygoprodeck.com/api/v7/cardinfo.php?type=Normal%20Monster")
+        // .then((results) => {
+        //     const d = results.data["data"] as Array<any>
+        //     characters.push(d);       
+        //     console.log("3")
+        //     for (let i = 0 ; i < characters.length ; i++) {
+        //         for (let j = 0 ; j < characters[i].length ; j++) {
+        //             box.push(characters[i][j])
+        //         }
+        //     }        
+        // })
+        // .catch(err => {
+        //     console.log("err:", err);
+        // });
         this.setState({
             characters: box
         })
-        console.log(box)
-        console.log(this.state.characters)
+        console.log(box[0])
+        console.log(this.state.characters.length)
     }
 
     render() {
@@ -80,7 +106,6 @@ class App extends Component <Props, State> {
             <Card 
             characterInfo={this.state.characters}
             loadingInfo={this.state.loading}
-            stateInfo={this}
             />
         </div>
         )
