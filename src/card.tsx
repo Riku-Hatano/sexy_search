@@ -5,26 +5,46 @@ import "./index.css"
 
 
 const Card = (props: any) => {
-    // let box: any = []
-    // const child = React.createElement("p", {key: 1, style:{color: "red"}}, "done")
-    // const child2 = React.createElement("p", {key: 2}, "done2")
-    // const child3 = React.createElement("p", {key: 3}, "done3")
-    // box.push(child)
-    // box.push(child2)
-    // box.push(child3)
-    // const parent2 = React.createElement("div", {}, [...box])
-    // console.log(parent2)
+    
     const childBox: any = []
     
     for (let i = 0 ; i < props.characters.length ; i++) {
-        const individualCard = React.createElement("div", {key: i}, props.characters[i].name)
-        childBox.push(individualCard)
-    }
+        const monsterItem = React.createElement(
+            "div",
+            {
+                className: "monsterItem"
+            },
+            props.characters[i].name
+        )
+        const flavorItem = React.createElement(
+            "div",
+            {
+                className: "flavorItem"
+            },
+            props.characters[i].desc
+        )
+        const individualCard = React.createElement(
+            "div",
+            {
+                key: i, 
+                className: "parentItem",
+                onClick: () => props.this.clicked(i)
+            }, 
+            monsterItem, flavorItem)
+            childBox.push(individualCard)
+        }
+        const cardList = React.createElement(
+            "div",
+            {
+                className: "cardList", 
+            },
+            childBox
+        )
 
 
     return (
         <>
-        {childBox}
+        {cardList}
         </>
     )
 
