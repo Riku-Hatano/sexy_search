@@ -15,13 +15,15 @@ body {
   }
 }
 
-#cardList {
+.cardList {
   display: flex;
   flex-wrap: wrap;
   width: 1000px;
   background-color: gray;
+  display: flex;
+  flex-wrap: wrap;
 }
-#card {
+.card {
   display: flex;
   flex-wrap: wrap;
 }
