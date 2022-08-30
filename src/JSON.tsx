@@ -18,11 +18,11 @@ class App extends Component <Props, State> {
             loading: true,
             characters: {}
         }
-        this.clicked = this.clicked.bind(this)
+        this.searchCard = this.searchCard.bind(this)
     }
 
-    clicked = (props: number) => {
-        console.log("id: " + props)
+    searchCard = (props: string) => {
+        console.log(props)
     }
 
     
