@@ -1,10 +1,10 @@
 import React from "react";
 import { Component } from "react";
+import "./index.css"
 
 
 
-
-const Card = (characters: any, loading: boolean, stateInfo: any) => {
+const Card = (props: any) => {
     // let box: any = []
     // const child = React.createElement("p", {key: 1, style:{color: "red"}}, "done")
     // const child2 = React.createElement("p", {key: 2}, "done2")
@@ -15,12 +15,16 @@ const Card = (characters: any, loading: boolean, stateInfo: any) => {
     // const parent2 = React.createElement("div", {}, [...box])
     // console.log(parent2)
     const childBox: any = []
-    console.log(characters)
-    console.log(loading)
+    
+    for (let i = 0 ; i < props.characters.length ; i++) {
+        const individualCard = React.createElement("div", {key: i}, props.characters[i].name)
+        childBox.push(individualCard)
+    }
+
 
     return (
         <>
-        {/* {parent2} */}
+        {childBox}
         </>
     )
 
