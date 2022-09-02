@@ -2,6 +2,10 @@ import axios from "axios"
 
 import { produceWithPatches } from "immer"
 import React, {Component} from "react"
+import { FC } from "react"
+import { VFC } from "react"
+import ReactDOM from "react-dom"
+import { blob } from "stream/consumers"
 import Card from "./card"
 
 type Props = {
@@ -21,8 +25,46 @@ class App extends Component <Props, State> {
         this.searchCard = this.searchCard.bind(this)
     }
 
-    searchCard = (props: string) => {
+    searchCard = (props: string, cardNumber: number, id: number) => {
+        let parent = document.getElementById(`individualCard${cardNumber}`) as HTMLDivElement
+        parent.classList.add("added")
+        
+        const url = props
+        let blob
+        axios.get(url)
+        .then((results) => {
+            blob = new Blob([results.data], {type: "image/jpeg"})
+        })
+        console.log(url)
+
+        const newImage = document.createElement("img")
+        newImage.className = "image"
+        newImage.src = `https://storage.googleapis.com/ygoprodeck.com/pics/${id}.jpg`
+        parent.appendChild(newImage)
         console.log(props)
+
+        // const newImage = React.createElement(
+        //     "p",
+        //     {
+        //         className: "image",
+        //         children: "done"
+        //     },
+        // )
+
+        // type Props = {
+        //     children ?: React.ReactNode
+        // }
+        
+        // console.log(newImage)
+        // console.log(newImage.props.children)
+        // console.log(newImage.props.className)
+        // console.log(parent)
+        
+        // return ReactDOM.createPortal (
+        //     // newImage.props.children,
+        //     newImage.props.children,
+        //     parent
+        // )
     }
 
     
@@ -60,7 +102,6 @@ class App extends Component <Props, State> {
             this.setState({
                 characters: box
             })
-            console.log(this.state.characters.length)
         })
         // catchでエラー時の挙動を定義
         .catch(err => {
