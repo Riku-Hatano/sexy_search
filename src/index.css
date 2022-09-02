@@ -4,14 +4,14 @@ body {
 }
 
 @media screen and (min-width: 480px) {
-  #cardContent {
-    color: white;
+  .parentItem {
+    color: black;
   }
 }
 
 @media screen and (max-width: 479px) {
-  #cardContent {
-    color: black;
+  .parentItem {
+    color: red;
   }
 }
 
@@ -42,5 +42,12 @@ body {
 .monsterItem {
   height: 40px;
   line-height: 40px;
+}
+.image {
+  height: 40px;
+  width: 200px;
+}
+.added {
+  background-color: purple;
 }
 
