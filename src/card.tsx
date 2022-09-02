@@ -5,7 +5,7 @@ import "./index.css"
 
 
 const Card = (props: any) => {
-    const childBox: any = []
+    const cardBox: any = []
 
     for (let i = 0 ; i < props.characters.length ; i++) {
         const monsterItem = React.createElement(
@@ -22,6 +22,7 @@ const Card = (props: any) => {
             },
             props.characters[i].desc
         )
+        // monsterItemとflavorItemをindividualCardを親要素にしてにまとめて、一枚のカードのようにする。
         const individualCard = React.createElement(
             "div",
             {
@@ -32,15 +33,16 @@ const Card = (props: any) => {
             }, 
             monsterItem, flavorItem)
 
-            childBox.push(individualCard)
+            cardBox.push(individualCard)
         }
 
+        //individualCardがたくさん入ったchildBoxを出力する。
         const cardList = React.createElement(
             "div",
             {
                 className: "cardList", 
             },
-            childBox 
+            cardBox 
         )
 
     return (

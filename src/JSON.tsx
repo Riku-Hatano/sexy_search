@@ -2,10 +2,7 @@ import axios from "axios"
 
 import { produceWithPatches } from "immer"
 import React, {Component} from "react"
-import { FC } from "react"
-import { VFC } from "react"
-import ReactDOM from "react-dom"
-import { blob } from "stream/consumers"
+import { createModuleResolutionCache } from "typescript"
 import Card from "./card"
 
 type Props = {
@@ -25,23 +22,22 @@ class App extends Component <Props, State> {
         this.searchCard = this.searchCard.bind(this)
     }
 
-    searchCard = (props: string, cardNumber: number, id: number) => {
+    searchCard = (cardUrl: string, cardNumber: number, id: number) => {
         let parent = document.getElementById(`individualCard${cardNumber}`) as HTMLDivElement
         parent.classList.add("added")
         
-        const url = props
-        let blob
-        axios.get(url)
-        .then((results) => {
-            blob = new Blob([results.data], {type: "image/jpeg"})
-        })
-        console.log(url)
+        // const url = cardUrl
+        // let blob
+        // axios.get(url)
+        // .then((results) => {
+        //     blob = new Blob([results.data], {type: "image/jpeg"})
+        // })
+        // console.log(url)
 
         const newImage = document.createElement("img")
         newImage.className = "image"
         newImage.src = `https://storage.googleapis.com/ygoprodeck.com/pics/${id}.jpg`
         parent.appendChild(newImage)
-        console.log(props)
 
         // const newImage = React.createElement(
         //     "p",
@@ -66,6 +62,7 @@ class App extends Component <Props, State> {
         //     parent
         // )
     }
+    //for
 
     
     componentDidMount(){
