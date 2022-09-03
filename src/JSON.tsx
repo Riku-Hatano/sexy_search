@@ -2,6 +2,7 @@ import axios from "axios"
 
 import { produceWithPatches } from "immer"
 import React, {Component} from "react"
+import ReactDOM, { createPortal } from "react-dom"
 import { createModuleResolutionCache } from "typescript"
 import Card from "./card"
 
@@ -34,19 +35,21 @@ class App extends Component <Props, State> {
         // })
         // console.log(url)
 
-        const newImage = document.createElement("img")
-        newImage.className = "image"
+        const newImage = document.createElement("img") as HTMLImageElement
+        newImage.className = "modal-window"
         newImage.src = `https://storage.googleapis.com/ygoprodeck.com/pics/${id}.jpg`
         parent.appendChild(newImage)
 
         // const newImage = React.createElement(
-        //     "p",
+        //     "img",
         //     {
-        //         className: "image",
-        //         children: "done"
+        //         className: "modal-window",
+        //         src: `https://storage.googleapis.com/ygoprodeck.com/pics/${id}.jpg`,
         //     },
         // )
-
+        
+        console.log(parent)
+        console.log(newImage)
         // type Props = {
         //     children ?: React.ReactNode
         // }
@@ -58,11 +61,10 @@ class App extends Component <Props, State> {
         
         // return ReactDOM.createPortal (
         //     // newImage.props.children,
-        //     newImage.props.children,
+        //     newImage,
         //     parent
         // )
     }
-    //for
 
     
     componentDidMount(){
@@ -104,30 +106,6 @@ class App extends Component <Props, State> {
         .catch(err => {
             console.log("err:", err);
         })
-
-        // axios.get("https://db.ygoprodeck.com/api/v7/cardinfo.php?type=Pendulum%20Normal%20Monster")
-        // .then((results) => { 
-        //     const d = results.data["data"] as Array<any>
-        //     characters.push(d);
-        //     console.log("2")
-        // })
-        // .catch(err => {
-        //     console.log("err:", err);
-        // });
-        // await axios.get("https://db.ygoprodeck.com/api/v7/cardinfo.php?type=Normal%20Monster")
-        // .then((results) => {
-        //     const d = results.data["data"] as Array<any>
-        //     characters.push(d);       
-        //     console.log("3")
-        //     for (let i = 0 ; i < characters.length ; i++) {
-        //         for (let j = 0 ; j < characters[i].length ; j++) {
-        //             box.push(characters[i][j])
-        //         }
-        //     }        
-        // })
-        // .catch(err => {
-        //     console.log("err:", err);
-        // });
     }
 
     render() {
@@ -143,52 +121,7 @@ class App extends Component <Props, State> {
         )
     }
 }
-    // fetch("https://db.ygoprodeck.com/api/v7/cardinfo.php?type=Pendulum%20Normal%20Monster")
-    //     .then(response => response.json())
-    //     .then(data => {
-    //         const d = data["data"] as Array<any>
-    //         characters.concat(d)
-    //         this.setState({
-    //             loading: true
-    //         })
-    //     })
-    //     console.log("pendulum normal")
-    // fetch("https://db.ygoprodeck.com/api/v7/cardinfo.php?type=Normal%20Monster")
-    //     .then(response => response.json())
-    //     .then(data => {
-    //         const d = data["data"] as Array<any>
-    //         characters.concat(d)
-    //         this.setState({
-    //             loading: false
-    //         })
-    //     })
-    //     console.log("normal")
-    
-    // console.log(characters)
-    // console.log(characters[0])
-    // box = characters[0].concat(characters[1], characters[2])
-    // console.log(box)
-
-
-
-
-    // fetch("https://db.ygoprodeck.com/api/v7/cardinfo.php?type=Normal%20Tuner%20Monster")
-
-    //     .then(response => response.json())
-    //     .then(data => {
-    //         console.log(data)
-    //         const d = data["data"] as Array<any>
-    //         console.log(d)
-    //         characters.concat(d)
-    //         console.log(characters)
-    //         this.setState({
-    //             loading: true
-    //         })
-    //     })
-    //     console.log("tuner normal")
-
-       
-        
-        
-
+   
 export default App
+
+
