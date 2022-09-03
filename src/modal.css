@@ -1,5 +1,7 @@
 .modal-window {
-  all: initial;
+  width: 200px;
+  height: 400px;
   position: absolute;
-  z-index: 1;
+  left: 0px;
+  top: 0px;
 }

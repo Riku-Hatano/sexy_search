@@ -2,7 +2,15 @@ body {
   background-color: gainsboro;
   margin: 0;
 }
-
+#parentRoot {
+  width: 1500px;
+  display: flex;
+  flex-wrap: wrap;
+}
+#root {
+  position: relative;
+  background-color: red;
+}
 @media screen and (min-width: 480px) {
   .parentItem {
     color: black;
@@ -16,6 +24,8 @@ body {
 }
 
 .cardList {
+  top: 0px;
+  left: 0px;
   display: flex;
   flex-wrap: wrap;
   width: 1000px;
@@ -38,12 +48,10 @@ body {
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 5;
   background-color: khaki;
-  z-index: 2;
 }
 .monsterItem {
   height: 40px;
   line-height: 40px;
-  z-index: 2;
 }
 .image {
   height: 400px;

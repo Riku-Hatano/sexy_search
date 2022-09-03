@@ -5,6 +5,7 @@ import React, {Component} from "react"
 import ReactDOM, { createPortal } from "react-dom"
 import { createModuleResolutionCache } from "typescript"
 import Card from "./card"
+import "./modal.css"
 
 type Props = {
 }
@@ -26,6 +27,7 @@ class App extends Component <Props, State> {
     searchCard = (cardUrl: string, cardNumber: number, id: number) => {
         let parent = document.getElementById(`individualCard${cardNumber}`) as HTMLDivElement
         parent.classList.add("added")
+        const root = document.getElementById("root") as HTMLDivElement
         
         // const url = cardUrl
         // let blob
@@ -38,7 +40,7 @@ class App extends Component <Props, State> {
         const newImage = document.createElement("img") as HTMLImageElement
         newImage.className = "modal-window"
         newImage.src = `https://storage.googleapis.com/ygoprodeck.com/pics/${id}.jpg`
-        parent.appendChild(newImage)
+        root.appendChild(newImage)
 
         // const newImage = React.createElement(
         //     "img",
@@ -110,14 +112,14 @@ class App extends Component <Props, State> {
 
     render() {
         return (
-        <div id="root">
-            <meta name="viewport" content="width=divice-width, initial-scale=1.0"></meta>    
-            <Card 
-            characters={this.state.characters}
-            loading={this.state.loading}
-            this={this}
-            />
-        </div>
+            <div id="root">
+                <meta name="viewport" content="width=divice-width, initial-scale=1.0"></meta>    
+                <Card 
+                characters={this.state.characters}
+                loading={this.state.loading}
+                this={this}
+                />
+            </div>
         )
     }
 }
