@@ -38,10 +38,12 @@ body {
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 5;
   background-color: khaki;
+  z-index: 2;
 }
 .monsterItem {
   height: 40px;
   line-height: 40px;
+  z-index: 2;
 }
 .image {
   height: 400px;

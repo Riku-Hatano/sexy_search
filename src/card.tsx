@@ -26,7 +26,7 @@ const Card = (props: any) => {
         const individualCard = React.createElement(
             "div",
             {
-                key: i, 
+                key: i,
                 id: `individualCard${i}`,
                 className: "parentItem",
                 onClick: () => props.this.searchCard(props.characters[i].card_images[0].image_url, i, props.characters[i].id)
@@ -41,6 +41,7 @@ const Card = (props: any) => {
             "div",
             {
                 className: "cardList", 
+                id: "cardList"
             },
             cardBox 
         )
