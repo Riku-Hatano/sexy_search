@@ -13,7 +13,7 @@ type State = {
     loading: boolean
     characters: any
 }
-class App extends Component <Props, State> {
+class Exchange extends Component <Props, State> {
 
     constructor(props: any){
         super(props)
@@ -29,13 +29,21 @@ class App extends Component <Props, State> {
     都度http通信をする。
     */
     searchCard = (cardUrl: string, cardNumber: number, id: number) => {//cardUrlは、別の方法で画像を持ってきたくなった時のために一応残してある。
-        let parent = document.getElementById(`individualCard${cardNumber}`) as HTMLDivElement
-        parent.classList.add("added")
-        const root = document.getElementById("root") as HTMLDivElement
-        const parentModalWindow = document.createElement("div") as HTMLDivElement
-        parentModalWindow.className = "parent-modal-window"
-        root.appendChild(parentModalWindow)
-        
+        // //クリックされたカードの背景を紫色のする処理
+        // let parent = document.getElementById(`individualCard${cardNumber}`) as HTMLDivElement
+        // parent.classList.add("added")
+
+        // //既存のDOM"root"にモーダルウインドウの背景を追加する処理
+        // const root = document.getElementById("root") as HTMLDivElement
+        // const parentModalWindow = document.createElement("div") as HTMLDivElement
+        // parentModalWindow.className = "parent-modal-window"
+        // root.appendChild(parentModalWindow)
+        // //背景に画像を載せる処理
+        // const newImage = document.createElement("img") as HTMLImageElement
+        // newImage.className = "modal-window"
+        // newImage.src = `https://storage.googleapis.com/ygoprodeck.com/pics/${id}.jpg`
+        // parentModalWindow.appendChild(newImage)
+
         // const url = cardUrl
         // let blob
         // axios.get(url)
@@ -44,10 +52,6 @@ class App extends Component <Props, State> {
         // })
         // console.log(url)
 
-        const newImage = document.createElement("img") as HTMLImageElement
-        newImage.className = "modal-window"
-        newImage.src = `https://storage.googleapis.com/ygoprodeck.com/pics/${id}.jpg`
-        parentModalWindow.appendChild(newImage)
 
         // const newImage = React.createElement(
         //     "img",
@@ -57,16 +61,16 @@ class App extends Component <Props, State> {
         //     },
         // )
         
-        console.log(parent)
-        console.log(root)
-        
         // return ReactDOM.createPortal (
-        //     // newImage.props.children,
+            //     // newImage.props.children,
         //     newImage,
         //     parent
         // )
+        console.log(document.getElementById("parentroot"))
+        // console.log("children: " + root.childElementCount)
     }
-
+//今まではカードをクリックするたびにrootにモーダルウインドウを新しく作成して追加していた。つまり、2回クリックするとモーダルウインドウが二つ作成されてしまうことになる。
+//これからは、あらかじめcomponentDidMountの段階でモーダルウインドウを作成しておき、クリックされた時にそのカードに対応した画像を持ってきて表示させる（imgのsrcを変更させる)
     
     componentDidMount(){
         this.setState({
@@ -107,17 +111,27 @@ class App extends Component <Props, State> {
         .catch(err => {
             console.log("err:", err);
         })
+        
+        //モーダルウインドウを作成
+        const root = document.getElementById("root") as HTMLDivElement
+        const parentModalWindow = document.createElement("div") as HTMLDivElement
+        const imageModalWindow = document.createElement("img") as HTMLImageElement
+
+
+
     }
 
     render() {
         return (
             <div id="parentroot">
-                <meta name="viewport" content="width=divice-width, initial-scale=1.0"></meta>    
-                <Card 
-                characters={this.state.characters}
-                loading={this.state.loading}
-                this={this}
-                />
+                <meta name="viewport" content="width=divice-width, initial-scale=1.0"></meta>
+                <div>
+                    <Card 
+                    characters={this.state.characters}
+                    loading={this.state.loading}
+                    this={this}
+                    />
+                </div>    
                 <div id="root">
 
                 </div>
@@ -126,6 +140,6 @@ class App extends Component <Props, State> {
     }
 }
    
-export default App
+export default Exchange
 
 
