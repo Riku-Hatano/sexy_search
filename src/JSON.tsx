@@ -5,6 +5,7 @@ import React, {Component} from "react"
 import ReactDOM, { createPortal } from "react-dom"
 import { createModuleResolutionCache } from "typescript"
 import Card from "./card"
+import ModalWindow from "./modal"
 import "./modal.css"
 
 type Props = {
@@ -12,6 +13,7 @@ type Props = {
 type State = {
     loading: boolean
     characters: any
+    modalImage: string
 }
 class Exchange extends Component <Props, State> {
 
@@ -19,7 +21,8 @@ class Exchange extends Component <Props, State> {
         super(props)
         this.state = {
             loading: true,
-            characters: {}
+            characters: {},
+            modalImage: "",
         }
         this.searchCard = this.searchCard.bind(this)
     }
@@ -30,8 +33,8 @@ class Exchange extends Component <Props, State> {
     */
     searchCard = (cardUrl: string, cardNumber: number, id: number) => {//cardUrlは、別の方法で画像を持ってきたくなった時のために一応残してある。
         // //クリックされたカードの背景を紫色のする処理
-        // let parent = document.getElementById(`individualCard${cardNumber}`) as HTMLDivElement
-        // parent.classList.add("added")
+        let parent = document.getElementById(`individualCard${cardNumber}`) as HTMLDivElement
+        parent.classList.add("added")
 
         // //既存のDOM"root"にモーダルウインドウの背景を追加する処理
         // const root = document.getElementById("root") as HTMLDivElement
@@ -66,7 +69,13 @@ class Exchange extends Component <Props, State> {
         //     newImage,
         //     parent
         // )
-        console.log(document.getElementById("parentroot"))
+        // let imgsrc = document.getElementById("imageModalWindow") as HTMLImageElement
+        const imgsrc = `https://storage.googleapis.com/ygoprodeck.com/pics/${id}.jpg`
+        this.setState({
+            modalImage: imgsrc
+        })
+        console.log(this.state.modalImage)
+        // console.log(document.getElementById("parentroot"))
         // console.log("children: " + root.childElementCount)
     }
 //今まではカードをクリックするたびにrootにモーダルウインドウを新しく作成して追加していた。つまり、2回クリックするとモーダルウインドウが二つ作成されてしまうことになる。
@@ -113,13 +122,17 @@ class Exchange extends Component <Props, State> {
         })
         
         //モーダルウインドウを作成
-        const root = document.getElementById("root") as HTMLDivElement
-        const parentModalWindow = document.createElement("div") as HTMLDivElement
-        const imageModalWindow = document.createElement("img") as HTMLImageElement
-
-
-
+        // const root = document.getElementById("root") as HTMLDivElement
+        // const parentModalWindow = document.createElement("div") as HTMLDivElement
+        // const imageModalWindow = document.createElement("img") as HTMLImageElement
+        // parentModalWindow.classList.add("parent-modal-window")
+        // imageModalWindow.classList.add("image-modal-window")
+        // imageModalWindow.id = ("imageModalWindow")
+        // imageModalWindow.src = this.state.modalImage
+        // root.appendChild(parentModalWindow)
+        // parentModalWindow.appendChild(imageModalWindow)
     }
+    
 
     render() {
         return (
@@ -133,7 +146,9 @@ class Exchange extends Component <Props, State> {
                     />
                 </div>    
                 <div id="root">
-
+                    <ModalWindow
+                    this={this}
+                    />
                 </div>
             </div>
         )

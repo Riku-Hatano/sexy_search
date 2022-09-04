@@ -1,18 +1,19 @@
 .parent-modal-window {
+  /* display: none; */
   position: fixed;
   top: 10%;
   left: 15%;
-  opacity: 50%;
   margin: auto;
   width: 70%;
   height: 450px;
   background-color: gainsboro;
 }
-.modal-window {
+
+.image-modal-window {
   display: block;
   margin: auto;
+  background-color: black;
   margin-top: 25px;
   width: 200px;
   height: 400px;
-  opacity: 100%;
 }
