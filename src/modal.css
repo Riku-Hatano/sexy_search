@@ -1,7 +1,14 @@
+.parent-modal-window {
+  position: fixed;
+  top: 0%;
+  left: 15%;
+  margin: auto;
+  width: 70%;
+  height: 400px;
+  background-color: black;
+}
 .modal-window {
   width: 200px;
   height: 400px;
-  position: absolute;
-  left: 0px;
-  top: 0px;
+  margin: auto;
 }
