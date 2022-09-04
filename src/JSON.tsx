@@ -24,10 +24,17 @@ class App extends Component <Props, State> {
         this.searchCard = this.searchCard.bind(this)
     }
 
-    searchCard = (cardUrl: string, cardNumber: number, id: number) => {
+    /*　
+    searchCardは、個別のカードがクリックされた時、カードに応じた画像を拾って表示させる処理。
+    都度http通信をする。
+    */
+    searchCard = (cardUrl: string, cardNumber: number, id: number) => {//cardUrlは、別の方法で画像を持ってきたくなった時のために一応残してある。
         let parent = document.getElementById(`individualCard${cardNumber}`) as HTMLDivElement
         parent.classList.add("added")
         const root = document.getElementById("root") as HTMLDivElement
+        const parentModalWindow = document.createElement("div") as HTMLDivElement
+        parentModalWindow.className = "parent-modal-window"
+        root.appendChild(parentModalWindow)
         
         // const url = cardUrl
         // let blob
@@ -40,7 +47,7 @@ class App extends Component <Props, State> {
         const newImage = document.createElement("img") as HTMLImageElement
         newImage.className = "modal-window"
         newImage.src = `https://storage.googleapis.com/ygoprodeck.com/pics/${id}.jpg`
-        root.appendChild(newImage)
+        parentModalWindow.appendChild(newImage)
 
         // const newImage = React.createElement(
         //     "img",
@@ -51,15 +58,7 @@ class App extends Component <Props, State> {
         // )
         
         console.log(parent)
-        console.log(newImage)
-        // type Props = {
-        //     children ?: React.ReactNode
-        // }
-        
-        // console.log(newImage)
-        // console.log(newImage.props.children)
-        // console.log(newImage.props.className)
-        // console.log(parent)
+        console.log(root)
         
         // return ReactDOM.createPortal (
         //     // newImage.props.children,
@@ -112,13 +111,16 @@ class App extends Component <Props, State> {
 
     render() {
         return (
-            <div id="root">
+            <div id="parentroot">
                 <meta name="viewport" content="width=divice-width, initial-scale=1.0"></meta>    
                 <Card 
                 characters={this.state.characters}
                 loading={this.state.loading}
                 this={this}
                 />
+                <div id="root">
+
+                </div>
             </div>
         )
     }
