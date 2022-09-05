@@ -31,7 +31,7 @@ class Exchange extends Component <Props, State> {
     searchCardは、個別のカードがクリックされた時、カードに応じた画像を拾って表示させる処理。
     都度http通信をする。
     */
-    searchCard = (cardUrl: string, cardNumber: number, id: number) => {//cardUrlは、別の方法で画像を持ってきたくなった時のために一応残してある。
+    searchCard = (cardNumber: number, id: number) => {//cardUrlは、別の方法で画像を持ってきたくなった時のために一応残してある。
         // クリックされたカードの背景を紫色のする処理
         let parent = document.getElementById(`individualCard${cardNumber}`) as HTMLDivElement
         parent.classList.add("added")
@@ -42,8 +42,16 @@ class Exchange extends Component <Props, State> {
             modalImage: imgsrc
         })
         console.log(this.state.modalImage)
+
+        // モーダルウインドウの表示/非表示を切り替える処理
+        const parentModalWindow = document.getElementById("parentModalWindow") as HTMLDivElement
+        parentModalWindow.style.display = "inline"
     }   
-     
+    eraseModalWindow() {
+        const parentModalWindow = document.getElementById("parentModalWindow") as HTMLDivElement
+        parentModalWindow.style.display = "none"
+    }
+
     componentDidMount(){
         this.setState({
             loading: true
@@ -100,6 +108,7 @@ class Exchange extends Component <Props, State> {
                 <div id="root">
                     <ModalWindow
                     src={this.state.modalImage}
+                    this={this}
                     />
                 </div>
             </div>
