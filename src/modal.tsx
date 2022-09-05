@@ -13,7 +13,9 @@ const ModalWindow = (props: any) => {
     const parentModalWindow = React.createElement(
         "div",
         {
-            className: "parent-modal-window"
+            className: "parent-modal-window",
+            id: "parentModalWindow",
+            onClick: () => props.this.eraseModalWindow()
         },
         imageModalWindow
     )
