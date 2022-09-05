@@ -5,7 +5,7 @@ const ModalWindow = (props: any) => {
     const imageModalWindow = React.createElement(
         "img",
         {
-            src: props,
+            src: props.src,
             className: "image-modal-window"
         },
         null
@@ -17,6 +17,7 @@ const ModalWindow = (props: any) => {
         },
         imageModalWindow
     )
+    console.log("props: " + props)
     // const parentModalWindow = document.createElement("div") as HTMLDivElement
     // const imageModalWindow = document.createElement("img") as HTMLImageElement
     // parentModalWindow.classList.add("parent-modal-window")
