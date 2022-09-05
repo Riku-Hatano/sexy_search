@@ -17,7 +17,8 @@ const ModalWindow = (props: any) => {
         },
         imageModalWindow
     )
-    console.log("props: " + props)
+
+    // うまく動作しなかった処理。
     // const parentModalWindow = document.createElement("div") as HTMLDivElement
     // const imageModalWindow = document.createElement("img") as HTMLImageElement
     // parentModalWindow.classList.add("parent-modal-window")

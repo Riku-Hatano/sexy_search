@@ -32,55 +32,18 @@ class Exchange extends Component <Props, State> {
     都度http通信をする。
     */
     searchCard = (cardUrl: string, cardNumber: number, id: number) => {//cardUrlは、別の方法で画像を持ってきたくなった時のために一応残してある。
-        // //クリックされたカードの背景を紫色のする処理
+        // クリックされたカードの背景を紫色のする処理
         let parent = document.getElementById(`individualCard${cardNumber}`) as HTMLDivElement
         parent.classList.add("added")
 
-        // //既存のDOM"root"にモーダルウインドウの背景を追加する処理
-        // const root = document.getElementById("root") as HTMLDivElement
-        // const parentModalWindow = document.createElement("div") as HTMLDivElement
-        // parentModalWindow.className = "parent-modal-window"
-        // root.appendChild(parentModalWindow)
-        // //背景に画像を載せる処理
-        // const newImage = document.createElement("img") as HTMLImageElement
-        // newImage.className = "modal-window"
-        // newImage.src = `https://storage.googleapis.com/ygoprodeck.com/pics/${id}.jpg`
-        // parentModalWindow.appendChild(newImage)
-
-        // const url = cardUrl
-        // let blob
-        // axios.get(url)
-        // .then((results) => {
-        //     blob = new Blob([results.data], {type: "image/jpeg"})
-        // })
-        // console.log(url)
-
-
-        // const newImage = React.createElement(
-        //     "img",
-        //     {
-        //         className: "modal-window",
-        //         src: `https://storage.googleapis.com/ygoprodeck.com/pics/${id}.jpg`,
-        //     },
-        // )
-        
-        // return ReactDOM.createPortal (
-            //     // newImage.props.children,
-        //     newImage,
-        //     parent
-        // )
-        // let imgsrc = document.getElementById("imageModalWindow") as HTMLImageElement
+        // モーダルウインドウの画像のsrcを変更する処理
         const imgsrc = `https://storage.googleapis.com/ygoprodeck.com/pics/${id}.jpg`
         this.setState({
             modalImage: imgsrc
         })
         console.log(this.state.modalImage)
-        // console.log(document.getElementById("parentroot"))
-        // console.log("children: " + root.childElementCount)
-    }
-//今まではカードをクリックするたびにrootにモーダルウインドウを新しく作成して追加していた。つまり、2回クリックするとモーダルウインドウが二つ作成されてしまうことになる。
-//これからは、あらかじめcomponentDidMountの段階でモーダルウインドウを作成しておき、クリックされた時にそのカードに対応した画像を持ってきて表示させる（imgのsrcを変更させる)
-    
+    }   
+     
     componentDidMount(){
         this.setState({
             loading: true
@@ -120,17 +83,6 @@ class Exchange extends Component <Props, State> {
         .catch(err => {
             console.log("err:", err);
         })
-        
-        //モーダルウインドウを作成
-        // const root = document.getElementById("root") as HTMLDivElement
-        // const parentModalWindow = document.createElement("div") as HTMLDivElement
-        // const imageModalWindow = document.createElement("img") as HTMLImageElement
-        // parentModalWindow.classList.add("parent-modal-window")
-        // imageModalWindow.classList.add("image-modal-window")
-        // imageModalWindow.id = ("imageModalWindow")
-        // imageModalWindow.src = this.state.modalImage
-        // root.appendChild(parentModalWindow)
-        // parentModalWindow.appendChild(imageModalWindow)
     }
     
 
