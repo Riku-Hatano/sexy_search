@@ -22,7 +22,7 @@ class Exchange extends Component <Props, State> {
         this.state = {
             loading: true,
             characters: {},
-            modalImage: "",
+            modalImage: "https://storage.googleapis.com/ygoprodeck.com/pics/38955728.jpg",
         }
         this.searchCard = this.searchCard.bind(this)
     }
@@ -147,7 +147,7 @@ class Exchange extends Component <Props, State> {
                 </div>    
                 <div id="root">
                     <ModalWindow
-                    this={this}
+                    src={this.state.modalImage}
                     />
                 </div>
             </div>
