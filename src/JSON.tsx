@@ -2,32 +2,59 @@ import axios from "axios"
 
 import { produceWithPatches } from "immer"
 import React, {Component} from "react"
+
+import ReactDOM, { createPortal } from "react-dom"
+import { createModuleResolutionCache } from "typescript"
 import Card from "./card"
+import ModalWindow from "./modal"
+import "./modal.css"
 
 type Props = {
 }
 type State = {
     loading: boolean
     characters: any
+    modalImage: string
 }
-class App extends Component <Props, State> {
+class Monster extends Component <Props, State> {
 
     constructor(props: any){
         super(props)
         this.state = {
             loading: true,
-            characters: {}
+
+            characters: {},
+            modalImage: "https://storage.googleapis.com/ygoprodeck.com/pics/38955728.jpg",
         }
-        this.clicked = this.clicked.bind(this)
-    }
-    clicked = (props: number) => {
-        console.log("id: " + props)
+        this.searchCard = this.searchCard.bind(this)
     }
 
-    
-    async componentDidMount(){
-        console.log("dones")
-        console.log("done")
+    /*　
+    searchCardは、個別のカードがクリックされた時、カードに応じた画像を拾って表示させる処理。
+    都度http通信をする。
+    */
+    searchCard = (cardNumber: number, id: number) => {//cardUrlは、別の方法で画像を持ってきたくなった時のために一応残してある。
+        // クリックされたカードの背景を紫色のする処理
+        let parent = document.getElementById(`individualCard${cardNumber}`) as HTMLDivElement
+        parent.classList.add("added")
+
+        // モーダルウインドウの画像のsrcを変更する処理
+        const imgsrc = `https://storage.googleapis.com/ygoprodeck.com/pics/${id}.jpg`
+        this.setState({
+            modalImage: imgsrc
+        })
+        console.log(this.state.modalImage)
+
+        // モーダルウインドウの表示/非表示を切り替える処理
+        const parentModalWindow = document.getElementById("parentModalWindow") as HTMLDivElement
+        parentModalWindow.style.display = "inline"
+    }   
+    eraseModalWindow() {
+        const parentModalWindow = document.getElementById("parentModalWindow") as HTMLDivElement
+        parentModalWindow.style.display = "none"
+    }
+
+    componentDidMount(){
         this.setState({
             loading: true
         })
@@ -42,19 +69,14 @@ class App extends Component <Props, State> {
             const d = results.data["data"] as Array<any>
             characters.push(d);
         })
-        // catchでエラー時の挙動を定義
-        .catch(err => {
-            console.log("err:", err);
-        });
-        axios.get("https://db.ygoprodeck.com/api/v7/cardinfo.php?type=Pendulum%20Normal%20Monster")
+
+        .then(() => axios.get("https://db.ygoprodeck.com/api/v7/cardinfo.php?type=Pendulum%20Normal%20Monster"))
         .then((results) => { 
             const d = results.data["data"] as Array<any>
             characters.push(d);
         })
-        .catch(err => {
-            console.log("err:", err);
-        });
-        await axios.get("https://db.ygoprodeck.com/api/v7/cardinfo.php?type=Normal%20Monster")
+
+        .then(() => axios.get("https://db.ygoprodeck.com/api/v7/cardinfo.php?type=Normal%20Monster"))
         .then((results) => {
             const d = results.data["data"] as Array<any>
             characters.push(d);       
@@ -64,75 +86,41 @@ class App extends Component <Props, State> {
                 }
             }        
         })
+
+        .then(() => {
+            this.setState({
+                characters: box
+            })
+        })
+        // catchでエラー時の挙動を定義
         .catch(err => {
             console.log("err:", err);
-        });
-        this.setState({
-            characters: box
         })
-        console.log(box)
-        console.log(this.state.characters)
     }
+    
 
     render() {
         return (
-        <div>
-            <meta name="viewport" content="width=divice-width, initial-scale=1.0"></meta>    
-            <Card 
-            characterInfo={this.state.characters}
-            loadingInfo={this.state.loading}
-            stateInfo={this}
-            />
-        </div>
+            <div id="parentroot">
+                <meta name="viewport" content="width=divice-width, initial-scale=1.0"></meta>
+                <div>
+                    <Card 
+                    characters={this.state.characters}
+                    loading={this.state.loading}
+                    this={this}
+                    />
+                </div>    
+                <div>
+                    <ModalWindow
+                    src={this.state.modalImage}
+                    this={this}
+                    />
+                </div>
+            </div>
         )
     }
 }
-    // fetch("https://db.ygoprodeck.com/api/v7/cardinfo.php?type=Pendulum%20Normal%20Monster")
-    //     .then(response => response.json())
-    //     .then(data => {
-    //         const d = data["data"] as Array<any>
-    //         characters.concat(d)
-    //         this.setState({
-    //             loading: true
-    //         })
-    //     })
-    //     console.log("pendulum normal")
-    // fetch("https://db.ygoprodeck.com/api/v7/cardinfo.php?type=Normal%20Monster")
-    //     .then(response => response.json())
-    //     .then(data => {
-    //         const d = data["data"] as Array<any>
-    //         characters.concat(d)
-    //         this.setState({
-    //             loading: false
-    //         })
-    //     })
-    //     console.log("normal")
-    
-    // console.log(characters)
-    // console.log(characters[0])
-    // box = characters[0].concat(characters[1], characters[2])
-    // console.log(box)
+   
+export default Monster
 
 
-
-
-    // fetch("https://db.ygoprodeck.com/api/v7/cardinfo.php?type=Normal%20Tuner%20Monster")
-
-    //     .then(response => response.json())
-    //     .then(data => {
-    //         console.log(data)
-    //         const d = data["data"] as Array<any>
-    //         console.log(d)
-    //         characters.concat(d)
-    //         console.log(characters)
-    //         this.setState({
-    //             loading: true
-    //         })
-    //     })
-    //     console.log("tuner normal")
-
-       
-        
-        
-
-export default App
