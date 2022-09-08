@@ -2,6 +2,7 @@ import axios from "axios"
 
 import { produceWithPatches } from "immer"
 import React, {Component} from "react"
+
 import ReactDOM, { createPortal } from "react-dom"
 import { createModuleResolutionCache } from "typescript"
 import Card from "./card"
@@ -67,11 +68,13 @@ class Monster extends Component <Props, State> {
             const d = results.data["data"] as Array<any>
             characters.push(d);
         })
+
         .then(() => axios.get("https://db.ygoprodeck.com/api/v7/cardinfo.php?type=Pendulum%20Normal%20Monster"))
         .then((results) => { 
             const d = results.data["data"] as Array<any>
             characters.push(d);
         })
+
         .then(() => axios.get("https://db.ygoprodeck.com/api/v7/cardinfo.php?type=Normal%20Monster"))
         .then((results) => {
             const d = results.data["data"] as Array<any>
@@ -82,6 +85,7 @@ class Monster extends Component <Props, State> {
                 }
             }        
         })
+
         .then(() => {
             this.setState({
                 characters: box
