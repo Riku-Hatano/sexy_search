@@ -2,13 +2,15 @@ import React from 'react';
 import logo from './logo.svg';
 import { Counter } from './features/counter/Counter';
 import './App.css';
-import Exchange from './JSON'
+import Monster from './JSON'
+import Home from './Home'
 
 function App() {
   return (
     <div className="App">
       <div>
-        <Exchange />
+        <Home />
+        <Monster />
       </div>
     </div>
   );

@@ -15,7 +15,7 @@ type State = {
     characters: any
     modalImage: string
 }
-class Exchange extends Component <Props, State> {
+class Monster extends Component <Props, State> {
 
     constructor(props: any){
         super(props)
@@ -105,7 +105,7 @@ class Exchange extends Component <Props, State> {
                     this={this}
                     />
                 </div>    
-                <div id="root">
+                <div>
                     <ModalWindow
                     src={this.state.modalImage}
                     this={this}
@@ -116,6 +116,6 @@ class Exchange extends Component <Props, State> {
     }
 }
    
-export default Exchange
+export default Monster
 
 
