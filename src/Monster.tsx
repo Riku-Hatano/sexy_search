@@ -1,10 +1,7 @@
 import axios from "axios"
 
-import { produceWithPatches } from "immer"
 import React, {Component} from "react"
 
-import ReactDOM, { createPortal } from "react-dom"
-import { createModuleResolutionCache } from "typescript"
 import Card from "./card"
 import ModalWindow from "./modal"
 import "./modal.css"
@@ -17,7 +14,6 @@ type State = {
     modalImage: string
 }
 class Monster extends Component <Props, State> {
-
     constructor(props: any){
         super(props)
         this.state = {
