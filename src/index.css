@@ -9,7 +9,7 @@ body {
 }
 #root {
   position: relative;
-  background-color: red;
+  background-color: gainsboro;
 }
 @media screen and (min-width: 480px) {
   .parentItem {

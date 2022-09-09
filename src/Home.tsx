@@ -1,15 +1,25 @@
-import react from 'React'
+import Monster from "./Monster"
+
 
 const Home = () => {
     return (
+        <div>
+            <button onClick={() => returnMonster()}>
+                return monster
+            </button>
+            <a href="/monster">monster</a>
+        </div>
+    )
+}
+
+const returnMonster = () => {
+    console.log("done")
+    return (
         <>
-        <div>done</div>
-        <div>done</div>
-        <div>done</div>
-        <div>done</div>
         <div>done</div>
         </>
     )
 }
+
 
 export default Home
