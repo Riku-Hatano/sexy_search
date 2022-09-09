@@ -8,6 +8,7 @@ const Home = () => {
                 return monster
             </button>
             <a href="/monster">monster</a>
+            <a href="/spell">spell</a>
         </div>
     )
 }
