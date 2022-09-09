@@ -1,18 +1,18 @@
 import React from 'react';
-import logo from './logo.svg';
 import { Counter } from './features/counter/Counter';
+import {Routes, BrowserRouter, Route, Link} from "react-router-dom"
 import './App.css';
-import Monster from './JSON'
+import Monster from './Monster'
 import Home from './Home'
 
 function App() {
   return (
-    <div className="App">
-      <div>
-        <Home />
-        <Monster />
-      </div>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/monster" element={<Monster />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
