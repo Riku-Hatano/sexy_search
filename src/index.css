@@ -2,26 +2,34 @@ body {
   background-color: gainsboro;
   margin: 0;
 }
-
-@media screen and (min-width: 480px) {
-  #cardContent {
-    color: white;
-  }
+#parentRoot {
+  width: 1500px;
+  display: flex;
+  flex-wrap: wrap;
 }
-
-@media screen and (max-width: 479px) {
-  #cardContent {
+#root {
+  position: relative;
+  background-color: gainsboro;
+}
+@media screen and (min-width: 480px) {
+  .parentItem {
     color: black;
   }
 }
 
-#cardList {
+@media screen and (max-width: 479px) {
+  .parentItem {
+    color: red;
+  }
+}
+
+.cardList {
+  top: 0px;
+  left: 0px;
   display: flex;
   flex-wrap: wrap;
   width: 1000px;
   background-color: gray;
-}
-#card {
   display: flex;
   flex-wrap: wrap;
 }
@@ -29,6 +37,9 @@ body {
   width: 220px;
   background-color: green;
   border: solid;
+}
+.parentItem:hover {
+  color: orange;
 }
 .flavorItem {
   height: 200px;
@@ -41,5 +52,12 @@ body {
 .monsterItem {
   height: 40px;
   line-height: 40px;
+}
+.image {
+  height: 400px;
+  width: 200px;
+}
+.added {
+  background-color: purple;
 }
 
