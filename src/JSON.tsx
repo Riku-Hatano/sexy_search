@@ -1,175 +1,125 @@
 import axios from "axios"
+
+import { produceWithPatches } from "immer"
 import React, {Component} from "react"
 
-import { resolveModuleName } from "typescript"
+import ReactDOM, { createPortal } from "react-dom"
+import { createModuleResolutionCache } from "typescript"
 import Card from "./card"
+import ModalWindow from "./modal"
+import "./modal.css"
 
-class App extends Component {
+type Props = {
+}
+type State = {
+    loading: boolean
+    characters: any
+    modalImage: string
+}
+class Monster extends Component <Props, State> {
+
     constructor(props: any){
         super(props)
         this.state = {
             loading: true,
-            characters2: []
+            characters: {},
+            modalImage: "https://storage.googleapis.com/ygoprodeck.com/pics/38955728.jpg",
         }
-        this.clicked = this.clicked.bind(this)
-    }
-    clicked = (props: number) => {
-        console.log("id: " + props)
+        this.searchCard = this.searchCard.bind(this)
     }
 
-    async componentDidMount(){
-    this.setState({
-        loading: true
-    })
-    
-    const characters: Array<any> = []
-    let characters2: Array<any> = []
-    let box: any = []
-    let counter: number
-    // fetch("https://db.ygoprodeck.com/api/v7/cardinfo.php?type=Pendulum%20Normal%20Monster")
-    //     .then(response => response.json())
-    //     .then(data => {
-    //         const d = data["data"] as Array<any>
-    //         characters.concat(d)
-    //         this.setState({
-    //             loading: true
-    //         })
-    //     })
-    //     console.log("pendulum normal")
-    // fetch("https://db.ygoprodeck.com/api/v7/cardinfo.php?type=Normal%20Monster")
-    //     .then(response => response.json())
-    //     .then(data => {
-    //         const d = data["data"] as Array<any>
-    //         characters.concat(d)
-    //         this.setState({
-    //             loading: false
-    //         })
-    //     })
-    //     console.log("normal")
-    axios.get("https://db.ygoprodeck.com/api/v7/cardinfo.php?type=Normal%20Tuner%20Monster")
-    // thenで成功した場合の処理
-    .then((results) => { // レスポンスが来たらthenを実行
-        // console.log(results.data); // コンソールログにresultsに含まれるdataを表示
-        const d = results.data["data"] as Array<any>
-        characters.push(d);
-    })
-    // catchでエラー時の挙動を定義
-    .catch(err => {
-        console.log("err:", err);
-    });
-    axios.get("https://db.ygoprodeck.com/api/v7/cardinfo.php?type=Pendulum%20Normal%20Monster")
-    .then((results) => { 
-        const d = results.data["data"] as Array<any>
-        characters.push(d);
-    })
-    .catch(err => {
-        console.log("err:", err);
-    });
-    axios.get("https://db.ygoprodeck.com/api/v7/cardinfo.php?type=Normal%20Monster")
-    .then((results) => {
-        const d = results.data["data"] as Array<any>
-        characters.push(d);       
-        for (let i = 0 ; i < characters.length ; i++) {
-            for (let j = 0 ; j < characters[i].length ; j++) {
-                box.push(characters[i][j])
-            }
-        }        
-    })
-    .catch(err => {
-        console.log("err:", err);
-    });
-    console.log(box)
-    
-    // console.log(characters)
-    // console.log(characters[0])
-    // box = characters[0].concat(characters[1], characters[2])
-    // console.log(box)
+    /*　
+    searchCardは、個別のカードがクリックされた時、カードに応じた画像を拾って表示させる処理。
+    都度http通信をする。
+    */
+    searchCard = (cardNumber: number, id: number) => {//cardUrlは、別の方法で画像を持ってきたくなった時のために一応残してある。
+        // クリックされたカードの背景を紫色のする処理
+        let parent = document.getElementById(`individualCard${cardNumber}`) as HTMLDivElement
+        parent.classList.add("added")
 
-
-
-
-    // fetch("https://db.ygoprodeck.com/api/v7/cardinfo.php?type=Normal%20Tuner%20Monster")
-
-    //     .then(response => response.json())
-    //     .then(data => {
-    //         console.log(data)
-    //         const d = data["data"] as Array<any>
-    //         console.log(d)
-    //         characters.concat(d)
-    //         console.log(characters)
-    //         this.setState({
-    //             loading: true
-    //         })
-    //     })
-    //     console.log("tuner normal")
-
-        // console.log(characters)
-        // console.log(characters.length)
-        // console.log(characters[2])
-        // newCharacters = characters[0].concat(characters[1], characters[2])
-        // console.log(newCharacters)
-        // console.log(Object.keys(data).length)
+        // モーダルウインドウの画像のsrcを変更する処理
+        const imgsrc = `https://storage.googleapis.com/ygoprodeck.com/pics/${id}.jpg`
         this.setState({
-            characters: characters
+            modalImage: imgsrc
+        })
+        console.log(this.state.modalImage)
+
+        // モーダルウインドウの表示/非表示を切り替える処理
+        const parentModalWindow = document.getElementById("parentModalWindow") as HTMLDivElement
+        parentModalWindow.style.display = "inline"
+    }   
+    eraseModalWindow() {
+        const parentModalWindow = document.getElementById("parentModalWindow") as HTMLDivElement
+        parentModalWindow.style.display = "none"
+    }
+
+    componentDidMount(){
+        this.setState({
+            loading: true
+        })
+        
+        const characters: Array<any> = []
+        let box: any = []
+        
+        axios.get("https://db.ygoprodeck.com/api/v7/cardinfo.php?type=Normal%20Tuner%20Monster")
+        // thenで成功した場合の処理
+        .then((results) => { // レスポンスが来たらthenを実行
+            // console.log(results.data); // コンソールログにresultsに含まれるdataを表示
+            const d = results.data["data"] as Array<any>
+            characters.push(d);
+        })
+
+        .then(() => axios.get("https://db.ygoprodeck.com/api/v7/cardinfo.php?type=Pendulum%20Normal%20Monster"))
+        .then((results) => { 
+            const d = results.data["data"] as Array<any>
+            characters.push(d);
+        })
+
+        .then(() => axios.get("https://db.ygoprodeck.com/api/v7/cardinfo.php?type=Normal%20Monster"))
+        .then((results) => {
+            const d = results.data["data"] as Array<any>
+            characters.push(d);       
+            for (let i = 0 ; i < characters.length ; i++) {
+                for (let j = 0 ; j < characters[i].length ; j++) {
+                    box.push(characters[i][j])
+                }
+            }        
+        })
+
+        .then(() => {
+            this.setState({
+                characters: box
+            })
+        })
+        // catchでエラー時の挙動を定義
+        .catch(err => {
+            console.log("err:", err);
         })
     }
-    render() {
-        // let counter = 0
-        // let monster
-        // let flavor
-        // let atk
-        // let def
-        // let monsterItem
-        // let flavorItem
-        // let atkItem
-        // let defItem
-        // console.log()
-        // const parent = document.getElementById("cardList")
-        // for (let i = 0 ; i < this.state.characters.length ; i++) {
-        //     let num = this.state.loading ? "loading" : this.state.characters[i].data.length
-        //     for (let j = 0 ; j < num ; j ++) {
-        //         const individualCard = document.createElement("div")
-        //         individualCard.id = counter
-        //         individualCard.addEventListener("click", () => this.clicked(individualCard.id))
-        //         parent.appendChild(individualCard)
+    
 
-        //         monster = this.state.characters[i].data[j].name
-        //         flavor = this.state.characters[i].data[j].desc
-        //         atk = this.state.characters[i].data[j].atk
-        //         def = this.state.characters[i].data[j].def
-        //         monsterItem = document.createElement("div")
-        //         flavorItem = document.createElement("div")
-        //         atkItem = document.createElement("div")
-        //         defItem = document.createElement("div")
-        //         monsterItem.className = "monsterItem parentItem"
-        //         flavorItem.className = "flavorItem parentItem"
-        //         atkItem.className = "monsterItem parentItem"
-        //         defItem.className = "monsterItem parentItem"
-        //         monsterItem.textContent = monster
-        //         flavorItem.textContent = flavor
-        //         atkItem.textContent = "atk: " + atk
-        //         defItem.textContent = "def: " + def
-        //         individualCard.appendChild(monsterItem)
-        //         individualCard.appendChild(flavorItem)
-        //         individualCard.appendChild(atkItem)
-        //         individualCard.appendChild(defItem)
-        //         counter++
-        //     }
-        // }
-        // counter = 0
-        
+    render() {
         return (
-            <div>
-                <meta name="viewport" content="width=divice-width, initial-scale=1.0"></meta>    
-                <div id="cardList">
-                        
+            <div id="parentroot">
+                <meta name="viewport" content="width=divice-width, initial-scale=1.0"></meta>
+                <div>
+                    <Card 
+                    characters={this.state.characters}
+                    loading={this.state.loading}
+                    this={this}
+                    />
+                </div>    
+                <div>
+                    <ModalWindow
+                    src={this.state.modalImage}
+                    this={this}
+                    />
                 </div>
             </div>
         )
     }
 }
-
-
-export default App
+   
+export default Monster
 
 
