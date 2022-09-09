@@ -18,7 +18,6 @@ class Monster extends Component <Props, State> {
         super(props)
         this.state = {
             loading: true,
-
             characters: {},
             modalImage: "https://storage.googleapis.com/ygoprodeck.com/pics/38955728.jpg",
         }
