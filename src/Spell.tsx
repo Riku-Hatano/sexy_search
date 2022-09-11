@@ -59,7 +59,7 @@ class Spell extends Component <Props, State> {
         
         
 
-        axios.get("https://db.ygoprodeck.com/api/v7/cardinfo.php?type=spell")
+        axios.get("https://db.ygoprodeck.com/api/v7/cardinfo.php?type=spell%20card&race=equip")
         .then((results) => {
             const d = results.data["data"] as Array<any>
             characters.push(d);       
