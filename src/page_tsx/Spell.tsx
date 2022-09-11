@@ -2,9 +2,8 @@ import axios from "axios"
 
 import React, {Component} from "react"
 
-import Card from "./make_modal_card/card"
-import ModalWindow from "./make_modal_card/modal"
-import "./modal.css"
+import Card from "../make_modal_card/card"
+import ModalWindow from "../make_modal_card/modal"
 
 type Props = {
 }
@@ -58,8 +57,32 @@ class Spell extends Component <Props, State> {
         let box: any = []
         
         
-
-        axios.get("https://db.ygoprodeck.com/api/v7/cardinfo.php?type=spell%20card&race=equip")
+        axios.get("https://db.ygoprodeck.com/api/v7/cardinfo.php?type=spell%20card&race=normal")
+        .then((results) => {
+            const d = results.data["data"] as Array<any>
+            characters.push(d);            
+        })
+        axios.get("https://db.ygoprodeck.com/api/v7/cardinfo.php?type=spell%20card&race=field")
+        .then((results) => {
+            const d = results.data["data"] as Array<any>
+            characters.push(d);            
+        })
+        axios.get("https://db.ygoprodeck.com/api/v7/cardinfo.php?type=spell%20card&race=continuous")
+        .then((results) => {
+            const d = results.data["data"] as Array<any>
+            characters.push(d);            
+        })
+        axios.get("https://db.ygoprodeck.com/api/v7/cardinfo.php?type=spell%20card&race=quick-play")
+        .then((results) => {
+            const d = results.data["data"] as Array<any>
+            characters.push(d);            
+        })
+        axios.get("https://db.ygoprodeck.com/api/v7/cardinfo.php?type=spell%20card&race=ritual")
+        .then((results) => {
+            const d = results.data["data"] as Array<any>
+            characters.push(d);            
+        })
+        .then(() => axios.get("https://db.ygoprodeck.com/api/v7/cardinfo.php?type=spell%20card&race=equip"))
         .then((results) => {
             const d = results.data["data"] as Array<any>
             characters.push(d);       
@@ -67,9 +90,9 @@ class Spell extends Component <Props, State> {
                 for (let j = 0 ; j < characters[i].length ; j++) {
                     box.push(characters[i][j])
                 }
-            }        
+            }    
+            console.log(box.length)    
         })
-
         .then(() => {
             this.setState({
                 characters: box
