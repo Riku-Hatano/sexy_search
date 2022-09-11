@@ -2,9 +2,9 @@ import React from 'react';
 import { Counter } from './features/counter/Counter';
 import {Routes, BrowserRouter, Route, Link} from "react-router-dom"
 import './App.css';
-import Monster from './Monster'
-import Spell from './Spell'
-import Home from './Home'
+import Monster from './page_tsx/Monster'
+import Spell from './page_tsx/Spell'
+import Home from './page_tsx/Home'
 
 function App() {
   return (

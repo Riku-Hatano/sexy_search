@@ -1,5 +1,5 @@
 import React from "react"
-import react from "react"
+import "./modal.css"
 
 const ModalWindow = (props: any) => {
     const imageModalWindow = React.createElement(

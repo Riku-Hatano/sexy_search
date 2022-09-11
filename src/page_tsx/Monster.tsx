@@ -2,9 +2,8 @@ import axios from "axios"
 
 import React, {Component} from "react"
 
-import Card from "./make_modal_card/card"
-import ModalWindow from "./make_modal_card/modal"
-import "./modal.css"
+import Card from "../make_modal_card/card"
+import ModalWindow from "../make_modal_card/modal"
 
 type Props = {
 }
