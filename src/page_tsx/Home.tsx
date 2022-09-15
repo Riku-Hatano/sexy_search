@@ -15,7 +15,10 @@ const Home = () => {
             <hr></hr>
             <a href="/spell">spell</a>
             <br></br>
-            <a href="/archetypes">archtypes</a>
+            <div>
+                <a href="/archetypes" id="1">archetypes1</a>
+                <a href="/archetypes" id="2">archetypes2</a>
+            </div>
         </div>
     )
 }
