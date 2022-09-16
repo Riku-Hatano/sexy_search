@@ -16,8 +16,8 @@ const Home = () => {
             <a href="/spell">spell</a>
             <br></br>
             <div>
-                <a href="/archetypes" id="1">archetypes1</a>
-                <a href="/archetypes" id="2">archetypes2</a>
+                <a href="/archetypes/Blue-Eyes">Blue-Eyes</a>
+                <a href="/archetypes/Albaz-Dragon">Albaz-Dragon</a>
             </div>
         </div>
     )

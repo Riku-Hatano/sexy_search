@@ -14,7 +14,8 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/monster" element={<Monster />} />
         <Route path="/spell" element={<Spell />} />
-        <Route path="/archetypes" element={<Archetypes />} />
+        {/* <Route path="/archetypes" component={Archetypes} /> */}
+        <Route path="archetypes/:archetype" element={<Archetypes />} />
       </Routes>
     </BrowserRouter>
   );
