@@ -68,13 +68,14 @@ const ComponentDidMount = () => {
     const characters: Array<any> = []
     let box: any = []
     
-    axios.get("https://db.ygoprodeck.com/api/v7/cardinfo.php?archetypes=" + archetype)
+    axios.get("https://db.ygoprodeck.com/api/v7/cardinfo.php?archetype=" + archetype)
     .then((results) => {
         const d = results.data["data"] as Array<any>
         characters.push(d);       
         for (let i = 0 ; i < characters.length ; i++) {
             for (let j = 0 ; j < characters[i].length ; j++) {
                 box.push(characters[i][j])
+                console.log(characters[i][j])
             }
         }        
     })
@@ -90,11 +91,12 @@ const ComponentDidMount = () => {
         console.log("err:", err);
     })
 }
-
+ComponentDidMount()
     
     return (
         <div id="parentroot">
             <meta name="viewport" content="width=divice-width, initial-scale=1.0"></meta>
+            <div>done</div>
             <div>
                 <Card 
                 characters={values.characters}
