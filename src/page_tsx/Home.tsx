@@ -17,7 +17,7 @@ const Home = () => {
             <br></br>
             <div>
                 <a href="/archetypes/Blue-Eyes">Blue-Eyes</a>
-                <a href="/archetypes/Albaz-Dragon">Albaz-Dragon</a>
+                <a href="/archetypes/Albaz Dragon">Albaz Dragon</a>
             </div>
         </div>
     )
